@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class SimpleSqliteActivity extends AppCompatActivity {
   private static final String TAG = SimpleSqliteActivity.class.getName();
+  private static final String DATABASE_NAME = "samplesimplesqlite.db";
   private static final String CREATE_AUTHOR_TABLE_STATEMENT =
       "CREATE TABLE IF NOT EXISTS author (" +
           "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -65,10 +66,16 @@ public class SimpleSqliteActivity extends AppCompatActivity {
         deleteData();
       }
     });
+    findViewById(R.id.bDeleteDatabase).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        deleteDatabase();
+      }
+    });
   }
 
   private void createDatabase() {
-    database = openOrCreateDatabase("samplesimplesqlite.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
+    database = openOrCreateDatabase(DATABASE_NAME, SQLiteDatabase.CREATE_IF_NECESSARY, null);
     database.execSQL(CREATE_AUTHOR_TABLE_STATEMENT);
     database.execSQL(CREATE_BOOK_TABLE_STATEMENT);
     Log.d(TAG, "---DATABASE samplesimplesqlite.db CREATED---");
@@ -126,6 +133,12 @@ public class SimpleSqliteActivity extends AppCompatActivity {
   private void deleteData() {
     database.delete("book", "id=?", new String[]{String.valueOf(newBookID1)});
     Log.d(TAG, "---DATA DELETED---");
+  }
+
+  private void deleteDatabase() {
+    database.close();
+    deleteDatabase(DATABASE_NAME);
+    Log.d(TAG, "---DATABASE DELETED---");
   }
 }
 

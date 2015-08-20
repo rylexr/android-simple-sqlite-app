@@ -47,4 +47,12 @@
         android:id="@+id/bDeleteData"
         android:layout_below="@+id/bUpdateData"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Database"
+        android:id="@+id/bDeleteDatabase"
+        android:layout_below="@+id/bDeleteData"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
